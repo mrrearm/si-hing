@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Si-Hing Mauro Salierno - Wing Chun Kung Fu Academy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(45deg, #1a1a1a, #2d1810, #1a1a1a);
+            color: #fff;
+            overflow-x: hidden;
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        .fire-sparks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .spark {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700 0%, #ff8c00 30%, #ff4500 60%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkRise 6s infinite linear;
+        }
+        
+        .spark.small {
+            width: 3px;
+            height: 3px;
+        }
+        
+        .spark.medium {
+            width: 5px;
+            height: 5px;
+        }
+        
+        .spark.large {
+            width: 7px;
+            height: 7px;
+        }
+        
+        @keyframes sparkRise {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+                transform: translateY(95vh) translateX(0) rotate(10deg) scale(1);
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg) scale(0.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+        
+        .logo-container {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .academy-name {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .academy-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.5),
+                2px 2px 4px rgba(0,0,0,0.8);
+            animation: academyGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .academy-subtitle {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.5rem;
+            color: #ff4444;
+            text-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
+            animation: fadeInUp 2s ease-out 0.3s both;
+        }
+        
+        @keyframes academyGlow {
+            0% {
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 0.5),
+                    2px 2px 4px rgba(0,0,0,0.8);
+            }
+            100% {
+                text-shadow: 
+                    0 0 20px rgba(255, 215, 0, 0.8),
+                    0 0 30px rgba(255, 215, 0, 0.4),
+                    2px 2px 4px rgba(0,0,0,0.8);
+            }
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ff4444, #ffd700);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShine 4s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .chinese-title {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            animation: fadeInUp 2s ease-out 0.5s both;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #ccc;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            animation: fadeInUp 2s ease-out 1s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 2s ease-out 1.5s both;
+        }
+        
+        .footer-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Cinzel', serif;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ffd700, #ff4444, #ffd700) 1;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(255, 215, 0, 0.1));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+        
+        .footer-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .footer-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 68, 68, 0.1));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+        }
+        
+        .footer-btn:hover:before {
+            left: 100%;
+        }
+        
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffd700;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffd700, #ff4444, #ffd700);
+            border-radius: 2px;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffd700, #ff4444, #ffd700);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .about-card:hover:before {
+            transform: translateX(0);
+        }
+        
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .card-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .philosophy {
+            background: rgba(255, 0, 0, 0.02);
+            margin: 4rem 0;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .philosophy-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            color: #ddd;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .philosophy-text:before,
+        .philosophy-text:after {
+            content: '"';
+            font-size: 4rem;
+            color: #ffd700;
+            position: absolute;
+            font-family: serif;
+        }
+        
+        .philosophy-text:before {
+            top: -20px;
+            left: -20px;
+        }
+        
+        .philosophy-text:after {
+            bottom: -40px;
+            right: -20px;
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 215, 0, 0.1));
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .dragon-animation {
+            position: fixed;
+            top: 20%;
+            right: -200px;
+            font-size: 6rem;
+            color: rgba(255, 215, 0, 0.3);
+            animation: dragonFly 20s infinite linear;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
+        @keyframes dragonFly {
+            0% {
+                right: -200px;
+                top: 20%;
+                transform: rotate(0deg);
+            }
+            25% {
+                right: 50%;
+                top: 30%;
+                transform: rotate(90deg);
+            }
+            50% {
+                right: 50%;
+                top: 70%;
+                transform: rotate(180deg);
+            }
+            75% {
+                right: -200px;
+                top: 60%;
+                transform: rotate(270deg);
+            }
+            100% {
+                right: -200px;
+                top: 20%;
+                transform: rotate(360deg);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .main-title {
+                font-size: 3rem;
+            }
+            
+            .academy-title {
+                font-size: 2rem;
+            }
+            
+            .chinese-title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 2rem;
+            }
+            
+            .footer-btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .spark {
+                animation-duration: 8s;
+            }
+        }
+        
+        @media (min-width: 1440px) {
+            .hero-content {
+                max-width: 1400px;
+            }
+            
+            .main-title {
+                font-size: 5rem;
+            }
+            
+            .chinese-title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 2rem;
+            }
+            
+            .section {
+                max-width: 1400px;
+                padding: 8rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 3.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 4rem;
+            }
+            
+            .about-card {
+                padding: 3rem;
+            }
+            
+            .card-icon {
+                font-size: 3.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.8rem;
+            }
+            
+            .card-text {
+                font-size: 1.2rem;
+            }
+            
+            .philosophy {
+                padding: 5rem 3rem;
+            }
+            
+            .philosophy-text {
+                font-size: 1.5rem;
+            }
+            
+            .contact {
+                padding: 5rem 3rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 3rem;
+            }
+            
+            .contact-item {
+                padding: 2.5rem;
+            }
+            
+            .footer-btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .academy-title {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+            
+            .academy-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .chinese-title {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+                line-height: 1.4;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .footer-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            
+            .footer-btn {
+                width: 100%;
+                max-width: 280px;
+                padding: 1rem 1.5rem;
+                font-size: 0.95rem;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .about-card {
+                padding: 2rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .philosophy {
+                padding: 3rem 1.5rem;
+                margin: 3rem 0;
+            }
+            
+            .philosophy-text {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            
+            .philosophy-text:before,
+            .philosophy-text:after {
+                font-size: 3rem;
+            }
+            
+            .philosophy-text:before {
+                top: -15px;
+                left: -15px;
+            }
+            
+            .philosophy-text:after {
+                bottom: -30px;
+                right: -15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .academy-title {
+                font-size: 1.3rem;
+            }
+            
+            .academy-subtitle {
+                font-size: 1rem;
+            }
+            
+            .chinese-title {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 2rem 0.5rem;
+            }
+            
+            .about-card {
+                padding: 1.5rem;
+            }
+            
+            .card-icon {
+                font-size: 2.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .card-text {
+                font-size: 1rem;
+            }
+            
+            .contact {
+                padding: 3rem 1rem;
+            }
+            
+            .contact-item {
+                padding: 1.5rem;
+            }
+            
+            .dragon-animation {
+                font-size: 4rem;
+                animation-duration: 25s;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fire-sparks" id="fireSparks"></div>
+    <div class="dragon-animation">🐉</div>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-container">
+                <p Wing Chun Academy</p>
+            </div>
+            
+            <h1 class="main-title">Si-Hing Mauro Salierno</h1>
+            <div class="chinese-title">马乌若</div>
+            <p class="subtitle">Maestro di Wing Chun Kung Fu • International Wing Chun Academy</p>
+            
+
+        </div>
+    </section>
+    
+    <section id="about" class="section">
+        <h2 class="section-title">L'Arte del Wing Chun</h2>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="card-icon">🥋</div>
+                <h3 class="card-title">Tradizione Millenaria</h3>
+                <p class="card-text">Il Wing Chun è un'arte marziale cinese che affonda le sue radici nella tradizione shaolin. Un sistema di combattimento efficace basato su principi di economia di movimento e forza intelligente.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Tecnica e Potenza</h3>
+                <p class="card-text">Attraverso la pratica costante del Chi Sao (mani appiccicose) e delle forme tradizionali, sviluppi riflessi fulminei, sensibilità tattica e potenza esplosiva.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="card-icon">🧘</div>
+                <h3 class="card-title">Equilibrio Interiore</h3>
+                <p class="card-text">Non solo tecnica di combattimento, ma via per lo sviluppo personale. Il Wing Chun insegna disciplina, rispetto, controllo di sé e armonia tra mente e corpo.</p>
+            </div>
+        </div>
+        
+        <div class="philosophy">
+            <p class="philosophy-text">
+                Wax on, wax off... Come nel Karate Kid, ogni movimento ha un significato profondo. 
+                Nel Wing Chun, ogni gesto è una lezione di vita, ogni tecnica una metafora per superare gli ostacoli. 
+                L'allievo impara non solo a combattere, ma a vivere con consapevolezza e determinazione.
+            </p>
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2 class="section-title">Il Percorso Formativo</h2>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="card-icon">🌱</div>
+                <h3 class="card-title">Livello Principiante</h3>
+                <p class="card-text">Apprendimento delle basi: posture, posizioni di guardia, primi pugni e parate. Focus sulla costruzione della struttura corporea e dei principi fondamentali.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="card-icon">🌿</div>
+                <h3 class="card-title">Livello Intermedio</h3>
+                <p class="card-text">Sviluppo del Chi Sao, tecniche di trapping, studio delle forme Chum Kiu e Biu Jee. Combattimento controllato e applicazioni pratiche.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="card-icon">🌳</div>
+                <h3 class="card-title">Livello Avanzato</h3>
+                <p class="card-text">Mook Jong (uomo di legno), armi tradizionali, combattimento libero. Perfezionamento delle tecniche e preparazione all'insegnamento.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="section">
+        <div class="contact">
+            <h2 class="section-title">Inizia il Tuo Percorso</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #ddd;">
+                "Il miglior momento per piantare un albero era 20 anni fa. Il secondo miglior momento è ora."
+            </p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <h3>Dove Trovarci</h3>
+                    <p>International Wing Chun Kung Fu Academy<br>Visita la nostra pagina Facebook per maggiori dettagli</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <h3>Orari Lezioni</h3>
+                    <p>Lezioni personalizzate per tutti i livelli<br>Corsi serali e weekend disponibili</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🎯</div>
+                    <h3>Prima Lezione</h3>
+                    <p>Lezione di prova gratuita<br>Scopri se il Wing Chun fa per te</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <div class="footer-buttons">
+                    <a href="https://www.facebook.com/share/19TMYkN8jA/" target="_blank" class="footer-btn">Visita l'Accademia</a>
+                    <a href="https://www.facebook.com/share/14EnCG3Dcgh/" target="_blank" class="footer-btn">Seguimi su Facebook</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Crea scintille di fuoco
+        function createFireSparks() {
+            const container = document.getElementById('fireSparks');
+            const sparkCount = 40;
+            
+            for (let i = 0; i < sparkCount; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                
+                // Dimensioni casuali
+                const sizes = ['small', 'medium', 'large'];
+                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+                spark.classList.add(randomSize);
+                
+                // Posizione casuale
+                spark.style.left = Math.random() * 100 + 'vw';
+                
+                // Deriva casuale
+                const drift = (Math.random() - 0.5) * 200;
+                spark.style.setProperty('--drift', drift + 'px');
+                
+                // Ritardo casuale
+                spark.style.animationDelay = Math.random() * 6 + 's';
+                
+                // Durata casuale
+                const duration = 6 + Math.random() * 4;
+                spark.style.animationDuration = duration + 's';
+                
+                container.appendChild(spark);
+                
+                // Ricrea la scintilla quando finisce l'animazione
+                spark.addEventListener('animationend', () => {
+                    spark.style.left = Math.random() * 100 + 'vw';
+                    const newDrift = (Math.random() - 0.5) * 200;
+                    spark.style.setProperty('--drift', newDrift + 'px');
+                    const newDuration = 6 + Math.random() * 4;
+                    spark.style.animationDuration = newDuration + 's';
+                });
+            }
+        }
+        
+        // Smooth scrolling per i link interni
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Animazione di ingresso per le card quando sono visibili
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Osserva tutte le card
+        document.querySelectorAll('.about-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Inizializza le scintille
+        createFireSparks();
+        
+        // Effetto parallax leggero per il background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+    </script>
+</body>
+</html>
