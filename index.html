@@ -22,6 +22,107 @@
             animation: gradientShift 15s ease infinite;
         }
         
+        /* Header e Menu */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo-and-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-title {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-title:hover {
+            color: #ffd700;
+        }
+        
+        .logo-header {
+            height: 60px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-header:hover {
+            transform: scale(1.05);
+        }
+        
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            z-index: 101;
+        }
+        
+        .hamburger-line {
+            width: 30px;
+            height: 3px;
+            background: #ffd700;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ffd700, #ff4444);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #ffd700;
+        }
+        
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-menu.active {
+            transform: translateX(0);
+        }
+        
         .fire-sparks {
             position: fixed;
             top: 0;
@@ -100,11 +201,27 @@
             position: relative;
             max-width: 1200px;
             padding: 2rem;
+            margin-top: 80px;
         }
         
         .logo-container {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
+        }
+        
+        .logo-main {
+            width: 340px;
+            height: 340px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            transition: all 0.5s ease;
+        }
+        
+        .logo-main:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.6);
         }
         
         .academy-name {
@@ -155,6 +272,12 @@
             -webkit-text-fill-color: transparent;
             animation: titleShine 4s ease-in-out infinite;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .main-title:hover {
+            transform: scale(1.02);
         }
         
         @keyframes titleShine {
@@ -405,6 +528,149 @@
             color: #ffd700;
         }
         
+        /* Galleria */
+        .gallery-section {
+            margin: 4rem 0;
+        }
+        
+        .gallery-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            height: 1100px;
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        
+        .gallery-nav-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffd700;
+            border: none;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .gallery-nav-btn:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-dot.active {
+            background: #ffd700;
+            transform: scale(1.2);
+        }
+        
+        /* Top Button */
+        .top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .top-btn.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .top-btn:hover {
+            background: rgba(255, 215, 0, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .footer-address {
+            margin-bottom: 1.5rem;
+            font-size: 1.0rem;
+            color: #ccc;
+        }
+        
+        .footer-copyright {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        
         .dragon-animation {
             position: fixed;
             top: 20%;
@@ -477,6 +743,10 @@
             
             .spark {
                 animation-duration: 8s;
+            }
+            
+            .gallery-slider {
+                height: 900px;
             }
         }
         
@@ -552,9 +822,60 @@
                 padding: 1rem 2.5rem;
                 font-size: 1.1rem;
             }
+            
+            .gallery-slider {
+                height: 1300px;
+            }
         }
         
         @media (max-width: 768px) {
+            .logo-and-title {
+                /* This CSS trick makes the children of this div (logo and title)
+                   behave as direct children of .header-container for layout purposes,
+                   allowing justify-content: space-between to work on all three elements. */
+                display: contents;
+            }
+
+            .header-title {
+                font-size: 1rem; /* Adjusted size for mobile view */
+                white-space: nowrap; /* Prevents the title from breaking into two lines */
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                border-left: 1px solid rgba(255, 215, 0, 0.3);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hamburger-menu.active .hamburger-line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger-menu.active .hamburger-line:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger-menu.active .hamburger-line:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
             .main-title {
                 font-size: 2.5rem;
                 line-height: 1.2;
@@ -642,6 +963,21 @@
                 bottom: -30px;
                 right: -15px;
             }
+            
+            .logo-main {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .gallery-slider {
+                height: 700px;
+            }
+            
+            .gallery-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -705,24 +1041,73 @@
                 font-size: 4rem;
                 animation-duration: 25s;
             }
+            
+            .logo-main {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .gallery-slider {
+                height: 550px;
+            }
+            
+            .gallery-dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .top-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <div class="logo-and-title">
+                <a href="#home">
+                    <img src="logo.png" alt="Wing Chun Academy Logo" class="logo-header">
+                </a>
+                <a href="#home" class="header-title">Si-Hing Mauro Salierno</a>
+            </div>
+            
+            <div class="hamburger-menu">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#home">Home</a>
+                <a href="#about">L'Arte</a>
+                <a href="#percorso">Percorso</a>
+                <a href="#contact">Contatti</a>
+            </nav>
+        </div>
+    </header>
+    
     <div class="fire-sparks" id="fireSparks"></div>
     <div class="dragon-animation">🐉</div>
     
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-content">
             <div class="logo-container">
-                <p Wing Chun Academy</p>
+                <img src="logo.png" alt="Wing Chun Academy Logo" class="logo-main">
             </div>
             
             <h1 class="main-title">Si-Hing Mauro Salierno</h1>
             <div class="chinese-title">马乌若</div>
             <p class="subtitle">Maestro di Wing Chun Kung Fu • International Wing Chun Academy</p>
             
-
+            <div class="cta-buttons">
+                <a href="#about" class="footer-btn">Scopri l'Arte</a>
+                <a href="#contact" class="footer-btn">Inizia il Tuo Percorso</a>
+            </div>
         </div>
     </section>
     
@@ -758,7 +1143,7 @@
         </div>
     </section>
     
-    <section class="section">
+    <section id="percorso" class="section">
         <h2 class="section-title">Il Percorso Formativo</h2>
         
         <div class="about-grid">
@@ -778,6 +1163,41 @@
                 <div class="card-icon">🌳</div>
                 <h3 class="card-title">Livello Avanzato</h3>
                 <p class="card-text">Mook Jong (uomo di legno), armi tradizionali, combattimento libero. Perfezionamento delle tecniche e preparazione all'insegnamento.</p>
+            </div>
+        </div>
+        
+        <div class="gallery-section">
+            <div class="gallery-container">
+                <div class="gallery-slider">
+                    <div class="gallery-slide">
+                        <img src="images/1.jpg" alt="Wing Chun Training 1">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="images/2.jpg" alt="Wing Chun Training 2">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="images/3.jpg" alt="Wing Chun Training 3">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="images/4.jpg" alt="Wing Chun Training 4">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="images/5.jpg" alt="Wing Chun Training 5">
+                    </div>
+                </div>
+                
+                <div class="gallery-nav">
+                    <button class="gallery-nav-btn prev-btn">❮</button>
+                    <button class="gallery-nav-btn next-btn">❯</button>
+                </div>
+                
+                <div class="gallery-dots">
+                    <div class="gallery-dot active"></div>
+                    <div class="gallery-dot"></div>
+                    <div class="gallery-dot"></div>
+                    <div class="gallery-dot"></div>
+                    <div class="gallery-dot"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -811,12 +1231,21 @@
             
             <div style="margin-top: 3rem;">
                 <div class="footer-buttons">
-                    <a href="https://www.facebook.com/share/19TMYkN8jA/" target="_blank" class="footer-btn">Visita l'Accademia</a>
+                    <a href="https://www.facebook.com/share/15p9SNWPGD/" target="_blank" class="footer-btn">Visita l'Accademia</a>
                     <a href="https://www.facebook.com/share/14EnCG3Dcgh/" target="_blank" class="footer-btn">Seguimi su Facebook</a>
                 </div>
             </div>
         </div>
     </section>
+    
+    <footer>
+        <div class="footer-address">
+            Ci trovi in: Via Roma 108, R., Castellammare di Stabia, 80053 (NA)
+        </div>
+        <p class="footer-copyright">© 2025 International Wing Chun Kung Fu Academy. Tutti i diritti riservati.</p>
+    </footer>
+    
+    <div class="top-btn" id="topBtn">↑</div>
     
     <script>
         // Crea scintille di fuoco
@@ -870,6 +1299,11 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    
+                    // Chiudi il menu mobile se aperto
+                    if (hamburgerMenu.classList.contains('active')) {
+                        toggleMenu();
+                    }
                 }
             });
         });
@@ -897,16 +1331,93 @@
             observer.observe(card);
         });
         
+        // Menu hamburger
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        function toggleMenu() {
+            hamburgerMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }
+        
+        hamburgerMenu.addEventListener('click', toggleMenu);
+        
+        // Galleria
+        const slider = document.querySelector('.gallery-slider');
+        const slides = document.querySelectorAll('.gallery-slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dots = document.querySelectorAll('.gallery-dot');
+        
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function goToSlide(slideIndex) {
+            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+            currentSlide = slideIndex;
+            
+            // Aggiorna i dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            goToSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            goToSlide(currentSlide);
+        }
+        
+        // Auto-scroll
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetInterval();
+            });
+        });
+        
+        // Top button
+        const topBtn = document.getElementById('topBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                topBtn.classList.add('active');
+            } else {
+                topBtn.classList.remove('active');
+            }
+        });
+        
+        topBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
         // Inizializza le scintille
         createFireSparks();
-        
-        // Effetto parallax leggero per il background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.hero');
-            const speed = scrolled * 0.5;
-            parallax.style.transform = `translateY(${speed}px)`;
-        });
     </script>
 </body>
 </html>
